@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.geoup.springboot.dao.TOrderDao">
+    <resultMap id="BaseResultMap" type="com.geoup.springboot.entity.TOrder">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="commodity_code" property="commodityCode"/>
+        <result column="count" property="count"/>
+        <result column="amount" property="amount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_no , user_id , commodity_code ,`count` ,amount
+    </sql>
+
+    <select id="getOrder" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from t_order
+        where id = #{id}
+    </select>
+
+    <!-- 存在则新增，否则修改-->
+    <update id="addOrder" parameterType="com.geoup.springboot.entity.TOrder">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from t_order where user_id = #{order.userId} and order_no = #{order.orderNo}
+        </selectKey>
+        <if test="count > 0">
+            update t_order
+            set amount = amount
+            where id = #{order.id}
+        </if>
+        <if test="count == 0">
+            insert into balance
+            <include refid="insertSelectiveSql"/>
+        </if>
+    </update>
+
+    <sql id="insertSelectiveSql">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="order.id != null">
+                id,
+            </if>
+            <if test="order.userId != null">
+                user_id,
+            </if>
+            <if test="order.orderNo != null">
+                order_no,
+            </if>
+            <if test="order.commodityCode != null">
+                commodity_code,
+            </if>
+            <if test="order.count != null">
+                `count`,
+            </if>
+            <if test="order.amount != null">
+                amount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="order.id != null">
+                id = #{order.id},
+            </if>
+            <if test="order.userId != null">
+                user_id = #{order.userId},
+            </if>
+            <if test="order.orderNo != null">
+                order_no = #{order.orderNo},
+            </if>
+            <if test="order.commodityCode != null">
+                commodity_code = #{order.commodityCode},
+            </if>
+            <if test="order.count != null">
+                `count` = #{order.count},
+            </if>
+            <if test="order.amount != null">
+                amount = #{order.amount},
+            </if>
+        </trim>
+    </sql>
+</mapper>
