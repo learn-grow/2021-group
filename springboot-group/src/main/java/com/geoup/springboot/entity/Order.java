@@ -10,7 +10,7 @@ import lombok.Setter;
  * @remark：TOrders
  */
 @Data
-public class TOrder {
+public class Order {
 
     /** 主键id **/
     private Integer id;

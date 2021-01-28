@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.geoup.springboot.dao.TOrderDao">
-    <resultMap id="BaseResultMap" type="com.geoup.springboot.entity.TOrder">
+<mapper namespace="com.geoup.springboot.dao.OrderDao">
+    <resultMap id="BaseResultMap" type="com.geoup.springboot.entity.Order">
         <id column="id" property="id"/>
         <result column="order_no" property="orderNo"/>
         <result column="user_id" property="userId"/>
@@ -22,7 +22,7 @@
     </select>
 
     <!-- 存在则新增，否则修改-->
-    <update id="addOrder" parameterType="com.geoup.springboot.entity.TOrder">
+    <update id="addOrder" parameterType="com.geoup.springboot.entity.Order">
         <selectKey keyProperty="count" resultType="int" order="BEFORE">
             select count(*) from t_order where user_id = #{order.userId} and order_no = #{order.orderNo}
         </selectKey>

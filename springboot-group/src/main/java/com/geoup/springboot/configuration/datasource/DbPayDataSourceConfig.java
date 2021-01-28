@@ -1,4 +1,4 @@
-package com.geoup.springboot.configuration;
+package com.geoup.springboot.configuration.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
@@ -54,7 +54,7 @@ public class DbPayDataSourceConfig {
      * @param ds
      * @return
      */
-    @Bean(name = "PayDataSourceTransactionManager")
+    @Bean(name = "payDataSourceTransactionManager")
     public DataSourceTransactionManager transactionManager(@Qualifier("payDataSource") DataSource ds) {
         return new DataSourceTransactionManager(ds);
     }
