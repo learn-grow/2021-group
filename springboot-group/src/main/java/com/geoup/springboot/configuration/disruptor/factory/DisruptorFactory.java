@@ -1,6 +1,5 @@
 package com.geoup.springboot.configuration.disruptor.factory;
 
-import com.geoup.springboot.SpringbootGroupApplication;
 import com.geoup.springboot.annotations.DisruptorHandler;
 import com.geoup.springboot.configuration.disruptor.model.EventModel;
 import com.geoup.springboot.configuration.disruptor.handler.AbstractHandler;
@@ -9,12 +8,10 @@ import com.geoup.springboot.utils.ApplicationContextProvider;
 import com.geoup.springboot.utils.MyClassLoader;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.EventFactory;
-import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
