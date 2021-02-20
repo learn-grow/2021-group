@@ -10,6 +10,8 @@
         <module>leetcode</module>
         <module>spring-cloud</module>
         <module>springboot-group</module>
+        <module>design-group</module>
+        <module>jdk-1.8</module>
     </modules>
     <packaging>pom</packaging>
     <name>2021-group</name>
